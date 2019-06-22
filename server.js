@@ -33,7 +33,7 @@ const corsOption = {
 
 app.use(cors("*"));
 
-app.use(bodyParser().json);
+app.use(bodyParser.json());
 app.use(passport.initialize());
 
 const cookieKeys = require("./config/keys").cookieKeys;
@@ -51,19 +51,8 @@ app.use(passport.session());
 app.get("/return-json", (req, res, next) => {
 	res.redirect("/signup");
 });
-app.get(`/auth/twitter`, passport.authenticate("twitter"));
-app.get(
-	"/auth/twitter/callback",
-	passport.authenticate("twitter", {
-		failureRedirect: "/signin"
-	}),
-	(req, res) => {
-		console.log(req.user);
 
-		const token = createToken(req.user, secret, "1hr");
-		res.redirect(`${baseURL}/habits?token=${token}`);
-	}
-);
+require("./routes/authRoutes")(app);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === "production") {
