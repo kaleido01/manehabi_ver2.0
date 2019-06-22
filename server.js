@@ -7,7 +7,6 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser"); // parse cookie header
 const cookieSession = require("cookie-session");
-const { createToken } = require("./validation/utils");
 require("./config/passport");
 
 const app = express();
