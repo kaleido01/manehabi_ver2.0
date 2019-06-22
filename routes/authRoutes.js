@@ -1,5 +1,5 @@
 const passport = require("passport");
-const { createToken } = require("./validation/utils");
+const { createToken } = require("../validation/utils");
 
 module.exports = app => {
 	app.get(`/auth/twitter`, passport.authenticate("twitter"));
