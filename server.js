@@ -4,6 +4,7 @@ const cors = require("cors");
 const jwt = require("jsonwebtoken");
 const path = require("path");
 const passport = require("passport");
+const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser"); // parse cookie header
 const cookieSession = require("cookie-session");
 const { createToken } = require("./validation/utils");
@@ -29,8 +30,10 @@ const corsOption = {
 	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 	credentials: true
 };
+
 app.use(cors("*"));
 
+app.use(bodyParser().json);
 app.use(passport.initialize());
 
 const cookieKeys = require("./config/keys").cookieKeys;
