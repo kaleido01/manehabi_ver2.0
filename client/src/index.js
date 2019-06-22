@@ -7,7 +7,7 @@ import "./index.css";
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import "semantic-ui-css/semantic.min.css";
-import withSession from "./components/withSession";
+// import withSession from "./components/withSession";
 
 // export const UserContext = createContext(null);
 
@@ -55,7 +55,12 @@ import withSession from "./components/withSession";
 // 	document.getElementById("root")
 // );
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+	<Router>
+		<App />
+	</Router>,
+	document.getElementById("root")
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
