@@ -16,7 +16,7 @@ const secret = require("./config/keys").secret;
 const baseClientURL = require("./config/keys").baseClientURL;
 const baseURL =
 	process.env.NODE_ENV === "production"
-		? "https://manehabi.herokuapp.com"
+		? "https://manehabi02.herokuapp.com"
 		: "http://localhost:3000";
 
 mongoose
@@ -61,6 +61,16 @@ app.get(
 		res.redirect(`${baseURL}/habits?token=${token}`);
 	}
 );
+
+// Server static assets if in production
+if (process.env.NODE_ENV === "production") {
+	// Set static folder
+	app.use(express.static("client/build"));
+
+	app.get("*", (req, res) => {
+		res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+	});
+}
 
 const PORT = process.env.PORT || 4000;
 
