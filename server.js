@@ -19,16 +19,17 @@ mongoose
 	.then(() => console.log("MongoDB Connected"))
 	.catch(err => console.log(err));
 
-const corsOption = {
-	origin: ["https://manehabi.herokuapp.com"],
-	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-	credentials: true
-};
+// const corsOption = {
+// 	origin: ["https://manehabi.herokuapp.com"],
+// 	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+// 	credentials: true
+// };
 
-app.use(cors("*"));
-
+// app.use(cors("*"));
 app.use(bodyParser.json());
+
 app.use(passport.initialize());
+app.use(passport.session());
 
 const cookieKeys = require("./config/keys").cookieKeys;
 app.use(
@@ -40,7 +41,6 @@ app.use(
 );
 
 app.use(cookieParser());
-app.use(passport.session());
 
 // app.get("/return-json", (req, res, next) => {
 // 	res.redirect("/signup");
