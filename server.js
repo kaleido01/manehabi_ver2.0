@@ -12,12 +12,7 @@ require("./config/passport");
 const app = express();
 
 const db = require("./config/keys").mongoURI;
-const secret = require("./config/keys").secret;
 const baseClientURL = require("./config/keys").baseClientURL;
-const baseURL =
-	process.env.NODE_ENV === "production"
-		? "https://manehabi02.herokuapp.com"
-		: "http://localhost:3000";
 
 mongoose
 	.connect(db, { useNewUrlParser: true })
@@ -47,9 +42,9 @@ app.use(
 app.use(cookieParser());
 app.use(passport.session());
 
-app.get("/return-json", (req, res, next) => {
-	res.redirect("/signup");
-});
+// app.get("/return-json", (req, res, next) => {
+// 	res.redirect("/signup");
+// });
 
 require("./routes/authRoutes")(app);
 

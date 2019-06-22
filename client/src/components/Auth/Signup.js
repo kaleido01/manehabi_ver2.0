@@ -230,6 +230,7 @@ class Signup extends React.Component {
 					href="/auth/twitter">
 					<Icon name="twitter" /> Twitterで会員登録する
 				</Button>
+				<a href="/auth/twitter"> aaa</a>
 			</Grid>
 		);
 	}
