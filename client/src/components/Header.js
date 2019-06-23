@@ -5,25 +5,31 @@ import Payments from "./payments";
 
 class Header extends React.Component {
 	renderContent() {
-		return (
-			<li>
-				<a href="/auth/google">login with google</a>
-				<a href="/auth/twitter">login with twitter</a>
-			</li>
-		);
-		// switch(this.props.auth){
-
-		//   case null:
-		//     return ""
-		//   case false:
-		//     return <li><a href="/auth/google">login with google</a></li>
-		//   default :
-		//     return [
-		//     <li ><Payments /></li>,
-		//     <li className="ml-3">your credits: {this.props.auth.credits}</li>,
-		//     <li><a href="/api/logout">logout</a></li>,
-		//     ]
-		// }
+		switch (this.props.auth) {
+			case null:
+				return "";
+			case false:
+				return (
+					<div>
+						<li>
+							<a href="/auth/google">login with google</a>
+						</li>
+						<li>
+							<a href="/auth/twitter">login with twitter</a>
+						</li>
+					</div>
+				);
+			default:
+				return [
+					<li>
+						<Payments />
+					</li>,
+					<li className="ml-3">your credits: {this.props.auth.credits}</li>,
+					<li>
+						<a href="/api/logout">logout</a>
+					</li>
+				];
+		}
 	}
 
 	render() {
