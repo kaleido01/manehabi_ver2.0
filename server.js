@@ -1,31 +1,26 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const passport = require("passport");
-const bodyParser = require("body-parser");
 const cookieSession = require("cookie-session");
-const cookieKeys = require("./config/keys").cookieKeys;
+const bodyParser = require("body-parser");
+const passport = require("passport");
+const keys = require("./config/keys");
+
 require("./config/passport");
+mongoose.connect(keys.mongoURI, { useNewUrlParser: true });
 
 const app = express();
 
-const db = require("./config/keys").mongoURI;
-
-mongoose
-	.connect(db, { useNewUrlParser: true })
-	.then(() => console.log("MongoDB Connected"))
-	.catch(err => console.log(err));
-
 app.use(bodyParser.json());
+
+app.use(
+	cookieSession({
+		maxAge: 30 * 24 * 60 * 60 * 1000,
+		keys: [keys.cookieKeys]
+	})
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(
-	cookieSession({
-		name: "session",
-		keys: [cookieKeys],
-		maxAge: 24 * 60 * 60 * 100
-	})
-);
 
 require("./routes/authRoutes")(app);
 
@@ -39,7 +34,4 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const PORT = process.env.PORT || 4000;
-
-app.listen(PORT, () => {
-	console.log(`Server listhening on PORT ${PORT}`);
-});
+app.listen(PORT);
