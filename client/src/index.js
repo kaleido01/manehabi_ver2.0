@@ -1,62 +1,25 @@
-import React, { createContext } from "react";
+import 'materialize-css/dist/css/materialize.min.css'
+import 'materialize-css/dist/js/materialize.min'
+
+import 'bootstrap/dist/css/bootstrap.min.css'
+import React from "react";
 import ReactDOM from "react-dom";
-import { ApolloProvider } from "react-apollo";
-import ApolloClient from "apollo-boost";
-import { BrowserRouter as Router } from "react-router-dom";
-import "./index.css";
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import reduxThunk from 'redux-thunk'
+
 import App from "./components/App";
-import "semantic-ui-css/semantic.min.css";
-// import withSession from "./components/withSession";
+import reducers from './reducers'
+import axios from 'axios'
 
-// export const UserContext = createContext(null);
+window.axios=axios
 
-// const client = new ApolloClient({
-// 	uri: "http://localhost:4000/graphql",
-// 	fetchOptions: {
-// 		credentials: "includes"
-// 	},
-// 	request: operation => {
-// 		const token = localStorage.getItem("token");
-// 		operation.setContext({
-// 			headers: {
-// 				authorization: token
-// 			}
-// 		});
-// 	},
-// 	onError: ({ networkError, graphQLErrors }) => {
-// 		if (networkError) {
-// 			console.log("network Error", networkError);
-// 		}
-// 		// if (graphQLErrors) {
-// 		// 	errors = graphQLErrors.map(({ message, data, path }) => {
-// 		// 		console.log(data);
-// 		// 		return data;
-// 		// 	});
-// 		// }
-// 	}
-// });
-
-// const Root = ({ refetch, currentUser }) => (
-// 	<Router>
-// 		<UserContext.Provider value={currentUser}>
-// 			<App refetch={refetch} />
-// 		</UserContext.Provider>
-// 	</Router>
-// );
-
-// const RootWithSession = withSession(Root);
-
-// ReactDOM.render(
-// 	<ApolloProvider client={client}>
-// 		<RootWithSession />
-// 	</ApolloProvider>,
-
-// 	document.getElementById("root")
-// );
+const store = createStore(reducers, applyMiddleware(reduxThunk));
 
 ReactDOM.render(
-	<Router>
+	<Provider store={store}>
 		<App />
-	</Router>,
-	document.getElementById("root")
+	</Provider>,
+	document.querySelector("#root")
 );
+
