@@ -7,7 +7,8 @@ class Header extends React.Component {
 	renderContent() {
 		return (
 			<li>
-				<a href="/auth/twitter">login with google</a>
+				<a href="/auth/google">login with google</a>
+				<a href="/auth/twitter">login with twitter</a>
 			</li>
 		);
 		// switch(this.props.auth){
