@@ -7,10 +7,13 @@ import Signup from "./Auth/Signup";
 const App = () => {
 	return (
 		<Fragment>
-			<Switch>
+			{/* <Switch>
 				<Route exact path="/" component={Homepage} />
-			</Switch>
-			<Route
+      </Switch> */}
+
+			<a href="/auth/twitter"> aaa</a>
+			<a href="/return-json"> aaa</a>
+			{/* <Route
 				path="/(.+)"
 				render={() => (
 					<div>
@@ -22,7 +25,7 @@ const App = () => {
 						</Layout>
 					</div>
 				)}
-			/>
+			/> */}
 		</Fragment>
 	);
 };
