@@ -7,6 +7,7 @@ const passport = require("passport");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser"); // parse cookie header
 const cookieSession = require("cookie-session");
+const cookieKeys = require("./config/keys").cookieKeys;
 require("./config/passport");
 
 const app = express();
@@ -30,8 +31,6 @@ app.use(bodyParser.json());
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-const cookieKeys = require("./config/keys").cookieKeys;
 app.use(
 	cookieSession({
 		name: "session",
@@ -42,9 +41,9 @@ app.use(
 
 app.use(cookieParser());
 
-// app.get("/return-json", (req, res, next) => {
-// 	res.redirect("/signup");
-// });
+app.get("/return-json", (req, res, next) => {
+	res.redirect("/signup");
+});
 
 require("./routes/authRoutes")(app);
 

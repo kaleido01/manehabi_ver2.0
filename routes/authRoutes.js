@@ -8,7 +8,7 @@ const baseURL =
 		: "http://localhost:3000";
 
 module.exports = app => {
-	app.get(`/auth/twitter`, passport.authenticate("twitter"));
+	app.get("/auth/twitter", passport.authenticate("twitter"));
 	app.get(
 		"/auth/twitter/callback",
 		passport.authenticate("twitter", {
