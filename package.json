@@ -1,5 +1,5 @@
 {
-	"name": "manehabi_ver2.0",
+	"name": "server",
 	"scripts": {
 		"start": "node server.js",
 		"server": "nodemon server.js",
